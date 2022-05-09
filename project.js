@@ -4,6 +4,7 @@ const form = document.getElementById('film-form');
 const titleElement = document.querySelector('#title');
 const directorElement = document.querySelector('#director');
 const urlElement = document.querySelector('#url');
+const cardbody = document.querySelectorAll('.card-body')[1];
 
 //3)UI objesini Başlatma bundan önce ui.js de constructar oluşturmalıyız.
 
@@ -25,6 +26,9 @@ function EventListeners() {
 		let films = storage.getFilmsFromStorage();
 		ui.loadAllFilms(films);
 	});
+
+	//14-adım silme işlemleri için ikinci cardbodye ulaşıp oradan deleteFilm fonksiyonu  silme işlemini gerçekleşitireceğiz
+	cardbody.addEventListener('click', deleteFilm);
 }
 
 function addFilm(e) {
@@ -48,4 +52,11 @@ function addFilm(e) {
 	//9.adımda ekleme işlemi sonrası input kutuları temizleyecek fonksiyonu ui içinde oluşturduk
 	ui.clearInputs(titleElement, directorElement, urlElement);
 	e.preventDefault();
+}
+
+//Film Silme işlemi-15adım a etiketinin parentının parentına ulaşarak o tablodaki film kaldırılacak
+function deleteFilm(e) {
+	if (e.target.id === 'delete-film') {
+		ui.deleteFilmFromUI(e.target);
+	}
 }

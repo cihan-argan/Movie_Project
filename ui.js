@@ -42,7 +42,6 @@ UI.prototype.displayMessage = function(message, type) {
 };
 //13.adım da loadAllFilms fonksiyonu oluşturulacak.
 UI.prototype.loadAllFilms = function(films) {
-
 	const filmList = document.querySelector('#films');
 	films.forEach(function(film) {
 		filmList.innerHTML += `
@@ -54,4 +53,10 @@ UI.prototype.loadAllFilms = function(films) {
                             </tr>
                             `;
 	});
+};
+
+//15.adım deleteFilmFromUI bu fonksiyonu oluşturup arayüzden ilgili filmin silinmesini sağlayacağız
+
+UI.prototype.deleteFilmFromUI = function(element) {
+	element.parentElement.parentElement.remove();
 };
