@@ -21,7 +21,7 @@ function EventListeners() {
 	form.addEventListener('submit', addFilm);
 	//13-Sayfa yüklendiğinde LS deki Kayıtlı filmler için işlem
 	document.addEventListener('DOMContentLoaded', function() {
-		//Burda ilk başta localstoragedan tüm arry alınacak.
+		//Burda ilk başta localstoragedan tüm arry alınacak. ve loadAllFilms fonksiyonu ui.js te oluşturulacak
 		let films = storage.getFilmsFromStorage();
 		ui.loadAllFilms(films);
 	});

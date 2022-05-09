@@ -40,8 +40,9 @@ UI.prototype.displayMessage = function(message, type) {
 		div.remove();
 	}, 1000);
 };
-
+//13.adım da loadAllFilms fonksiyonu oluşturulacak.
 UI.prototype.loadAllFilms = function(films) {
+
 	const filmList = document.querySelector('#films');
 	films.forEach(function(film) {
 		filmList.innerHTML += `
