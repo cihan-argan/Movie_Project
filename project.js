@@ -9,6 +9,9 @@ const urlElement = document.querySelector('#url');
 
 const ui = new UI();
 
+//11.adım -Storage Objesi Üret
+const storage = new Storage();
+
 //4) Tüm eventleri Yükleme
 
 EventListeners();
@@ -16,6 +19,12 @@ EventListeners();
 function EventListeners() {
 	//5)-Forma submit eventi katmamız gerekli
 	form.addEventListener('submit', addFilm);
+	//13-Sayfa yüklendiğinde LS deki Kayıtlı filmler için işlem
+	document.addEventListener('DOMContentLoaded', function() {
+		//Burda ilk başta localstoragedan tüm arry alınacak.
+		let films = storage.getFilmsFromStorage();
+		ui.loadAllFilms(films);
+	});
 }
 
 function addFilm(e) {
@@ -26,14 +35,17 @@ function addFilm(e) {
 
 	if (title === '' || director === '' || url === '') {
 		//hata mesajını yazdıracağız
-
+		//10.adımda alert mesajı taslağını ve mesajın nerde ne kadar süre olacapı fonksiyon oluşturuldu ui içinde.
 		ui.displayMessage('Boş alan bırakmayınız...', 'danger');
 	} else {
-		//Yeni Film
+		//7-Yeni Film
 		const newFilm = new Film(title, director, url);
-		ui.addfilmtoUI(newFilm); //arayüze film ekleme bu fonksiyon sayesinde gerçekleşti.
+		ui.addfilmtoUI(newFilm); //arayüze film ekleme bu fonksiyon sayesinde gerçekleşti.-8.adımda bu fonksiyonu ui içinde oluşturduk.
+
+		storage.addFilmToStorage(newFilm); //Storage Film ekleme işlemini gerçekleştirdik -12 adım olarak ve hemen Storage.js içinde bu fonksiyonu oluşturucaz.
 		ui.displayMessage('Tebrikler.. İşleminiz başarıyla eklendi..', 'success');
 	}
+	//9.adımda ekleme işlemi sonrası input kutuları temizleyecek fonksiyonu ui içinde oluşturduk
 	ui.clearInputs(titleElement, directorElement, urlElement);
 	e.preventDefault();
 }
