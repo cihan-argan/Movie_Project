@@ -26,6 +26,14 @@ function addFilm(e) {
 
 	if (title === '' || director === '' || url === '') {
 		//hata mesajını yazdıracağız
+
+		ui.displayMessage('Boş alan bırakmayınız...', 'danger');
+	} else {
+		//Yeni Film
+		const newFilm = new Film(title, director, url);
+		ui.addfilmtoUI(newFilm); //arayüze film ekleme bu fonksiyon sayesinde gerçekleşti.
+		ui.displayMessage('Tebrikler.. İşleminiz başarıyla eklendi..', 'success');
 	}
+	ui.clearInputs(titleElement, directorElement, urlElement);
 	e.preventDefault();
 }
