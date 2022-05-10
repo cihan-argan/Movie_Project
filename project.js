@@ -58,5 +58,8 @@ function addFilm(e) {
 function deleteFilm(e) {
 	if (e.target.id === 'delete-film') {
 		ui.deleteFilmFromUI(e.target);
+		//16.adım elementi storage üzerinden silmek için elementin title ismi ile arraydaki title ismi aynı ise silme işlemi yapıcaz. bunun için e.targeta tıkladığımızda a tagi gelir parent elementi ise td dir previouselementSibling dediğimizde ise karşımıza yönetmen adı çıkacak bir diğer kardeşe ulaşarak previouselementsibling diyerek filmin isminin olduğu td ye ulaşmış olacağız burdan da textcontent diyerek filmin adına ulaşmış olacağız diğer adımda ise array içinde bu isimle aynı isime sahip elemanı bulup kaldıracağız.bu uzun bulma işlemini storage içinde oluşturacağımız deleteFilmFromStorage isimli fonksiyona göndereceğiz.
+		storage.deleteFilmFromStorage(e.target.parentElement.previousElementSibling.previousElementSibling.textContent);
+		ui.displayMessage('Silme işlemi başarıyla gerçekleşti...', 'info');
 	}
 }
