@@ -26,17 +26,22 @@ Storage.prototype.getFilmsFromStorage = function() {
 	return films;
 };
 
+//16.adım fonksiyona gelen film ismini storage içindeki arrayden silme işlemi
+Storage.prototype.deleteFilmFromStorage = function(filmTitle) {
+	let films = this.getFilmsFromStorage();
 
-//16.adım fonksiyona gelen film ismini storage içindeki arrayden silme işlemi 
-Storage.prototype.deleteFilmFromStorage = function(filmTitle){
-		let films = this.getFilmsFromStorage();
+	films.forEach(function(film, index) {
+		if (film.title === filmTitle) {
+			films.splice(index, 1);
+		}
+	});
 
-		films.forEach(function(film,index){
-			if(film.title === filmTitle){
-				films.splice(index,1);
-			}
-		});
-	
-		localStorage.setItem("films",JSON.stringify(films));
+	localStorage.setItem('films', JSON.stringify(films));
+};
 
-}
+//18-adımın ikinci kısmında ise storage üzerinden bütün filmleri sileceğimiz fonksiyonu oluşturucaz
+
+Storage.prototype.clearAllFilmsFromStorage = function() {
+	//films keyine sahip bütün elemanları kaldır dedik.
+	localStorage.removeItem('films');
+};

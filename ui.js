@@ -38,7 +38,7 @@ UI.prototype.displayMessage = function(message, type) {
 
 	setTimeout(function() {
 		div.remove();
-	}, 1000);
+	}, 2000);
 };
 //13.adım da loadAllFilms fonksiyonu oluşturulacak.
 UI.prototype.loadAllFilms = function(films) {
@@ -59,4 +59,16 @@ UI.prototype.loadAllFilms = function(films) {
 
 UI.prototype.deleteFilmFromUI = function(element) {
 	element.parentElement.parentElement.remove();
+};
+
+//18.adım da burada ilk uidan kaldırmak için fonksiyon oluşturacağız
+UI.prototype.clearAllFilmsFromUI = function() {
+	const filmList = document.querySelector('#films');
+
+	//filmList.innerHTML=""; 1.yöntem  bu yöntemde işe yarar fakat yavaş çalışmaktadır.
+	while (filmList.firstElementChild !== null) {
+		//ids films olan elemanı filmList içine aldık film list içinde firstElementChild olduğu sürece bu while döngüsü dönecek.hiç eleman kalmayınca bu iş tamamlanmış olacak.
+
+		filmList.firstElementChild.remove();
+	}
 };

@@ -5,6 +5,7 @@ const titleElement = document.querySelector('#title');
 const directorElement = document.querySelector('#director');
 const urlElement = document.querySelector('#url');
 const cardbody = document.querySelectorAll('.card-body')[1];
+const clear = document.querySelector('#clear-films');
 
 //3)UI objesini Başlatma bundan önce ui.js de constructar oluşturmalıyız.
 
@@ -29,6 +30,9 @@ function EventListeners() {
 
 	//14-adım silme işlemleri için ikinci cardbodye ulaşıp oradan deleteFilm fonksiyonu  silme işlemini gerçekleşitireceğiz
 	cardbody.addEventListener('click', deleteFilm);
+
+	//17-Tümünü temizle butonununa bastığında clearAllFilms fonksiyonu çalışacak
+	clear.addEventListener('click', clearAllFilms);
 }
 
 function addFilm(e) {
@@ -61,5 +65,17 @@ function deleteFilm(e) {
 		//16.adım elementi storage üzerinden silmek için elementin title ismi ile arraydaki title ismi aynı ise silme işlemi yapıcaz. bunun için e.targeta tıkladığımızda a tagi gelir parent elementi ise td dir previouselementSibling dediğimizde ise karşımıza yönetmen adı çıkacak bir diğer kardeşe ulaşarak previouselementsibling diyerek filmin isminin olduğu td ye ulaşmış olacağız burdan da textcontent diyerek filmin adına ulaşmış olacağız diğer adımda ise array içinde bu isimle aynı isime sahip elemanı bulup kaldıracağız.bu uzun bulma işlemini storage içinde oluşturacağımız deleteFilmFromStorage isimli fonksiyona göndereceğiz.
 		storage.deleteFilmFromStorage(e.target.parentElement.previousElementSibling.previousElementSibling.textContent);
 		ui.displayMessage('Silme işlemi başarıyla gerçekleşti...', 'info');
+	}
+}
+
+//18- clearAllFilms fonksiyonu içinde hem uı da hemde storage da tüm filmler silinmesi için iki kısımada özel fonksiyon oluşturacağız.
+
+function clearAllFilms() {
+	if (confirm('Tüm filmleri silmek istediğinizde eminmisiniz ?')) {
+		ui.clearAllFilmsFromUI();
+		storage.clearAllFilmsFromStorage();
+		ui.displayMessage('Tüm Filmler Temizlendi...', 'warning');
+	} else {
+		ui.displayMessage('Tüm filmleri silme işlemi iptal edildi...', 'primary');
 	}
 }
